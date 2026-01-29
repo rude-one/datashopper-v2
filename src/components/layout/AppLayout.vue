@@ -7,14 +7,14 @@ const uiStore = useUiStore()
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50">
+  <div class="min-h-screen">
     <TheSidebar />
     <div
       class="transition-all duration-300"
-      :class="uiStore.sidebarCollapsed ? 'ml-16' : 'ml-56'"
+      :class="uiStore.sidebarCollapsed ? 'ml-[72px]' : 'ml-[220px]'"
     >
       <TheHeader />
-      <main class="p-6">
+      <main class="p-8">
         <slot />
       </main>
     </div>

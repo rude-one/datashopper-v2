@@ -13,16 +13,16 @@ onMounted(() => {
 
 const chartDatasets = computed(() => [
   {
-    label: 'Traffic',
+    label: 'Total Traffic',
     data: dashboardStore.chartData.filtered,
     borderColor: '#8b5cf6',
-    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+    backgroundColor: 'rgba(139, 92, 246, 0.08)',
     fill: true
   },
   {
-    label: 'Identified Contacts',
+    label: 'Identified Visitors',
     data: dashboardStore.chartData.identified,
-    borderColor: '#6366f1',
+    borderColor: '#c4b5fd',
     backgroundColor: 'transparent',
     fill: false
   }
@@ -30,47 +30,42 @@ const chartDatasets = computed(() => [
 </script>
 
 <template>
-  <div class="space-y-6 animate-fade-in">
-    <!-- Top Row: Chart + Donut -->
+  <div class="space-y-6">
+    <!-- Main Grid -->
     <div class="grid grid-cols-12 gap-6">
-      <!-- Traffic Chart -->
-      <div class="col-span-12 lg:col-span-8">
+      <!-- Traffic Chart Card -->
+      <div class="col-span-12 xl:col-span-8">
         <div class="card p-6">
-          <!-- Header -->
-          <div class="flex items-center justify-between mb-6">
+          <div class="flex items-center justify-between mb-8">
             <div>
               <h2 class="text-lg font-semibold text-gray-900">Traffic & Identification Trend</h2>
-              <p class="text-sm text-gray-500 mt-0.5">Daily visitors vs identified contacts</p>
+              <p class="text-sm text-gray-500 mt-1">Daily visitors vs identified contacts</p>
             </div>
-            <span class="live-indicator">LIVE</span>
+            <div class="live-badge">LIVE</div>
           </div>
 
-          <!-- Chart -->
-          <div class="h-72">
+          <div class="h-[280px]">
             <LineChart
               v-if="dashboardStore.chartData.labels.length > 0"
               :labels="dashboardStore.chartData.labels"
               :datasets="chartDatasets"
             />
-            <div
-              v-else
-              class="h-full flex items-center justify-center text-gray-400"
-            >
-              <div class="flex flex-col items-center gap-2">
-                <div class="w-8 h-8 border-2 border-gray-200 border-t-primary-500 rounded-full animate-spin"></div>
-                <span class="text-sm">Loading chart data...</span>
+            <div v-else class="h-full flex items-center justify-center">
+              <div class="flex flex-col items-center gap-3">
+                <div class="w-8 h-8 border-2 border-gray-200 border-t-brand rounded-full animate-spin"></div>
+                <span class="text-sm text-gray-400">Loading data...</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Traffic by Brand -->
-      <div class="col-span-12 lg:col-span-4">
+      <!-- Donut Chart Card -->
+      <div class="col-span-12 xl:col-span-4">
         <div class="card p-6 h-full">
-          <div class="mb-6">
+          <div class="mb-8">
             <h2 class="text-lg font-semibold text-gray-900">Traffic by Brand</h2>
-            <p class="text-sm text-gray-500 mt-0.5">Distribution across portfolio</p>
+            <p class="text-sm text-gray-500 mt-1">Distribution across portfolio</p>
           </div>
           <DonutChart :data="dashboardStore.trafficByBrand" />
         </div>

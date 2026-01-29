@@ -14,7 +14,6 @@ const props = defineProps({
   data: {
     type: Array,
     required: true
-    // [{ label: 'Brand', value: 28, color: '#8b5cf6' }]
   }
 })
 
@@ -24,25 +23,26 @@ const chartData = computed(() => ({
     data: props.data.map(d => d.value),
     backgroundColor: props.data.map(d => d.color),
     borderWidth: 0,
-    hoverOffset: 4
+    hoverOffset: 8,
+    spacing: 2
   }]
 }))
 
 const chartOptions = {
   responsive: true,
   maintainAspectRatio: false,
-  cutout: '70%',
+  cutout: '72%',
   plugins: {
     legend: {
       display: false
     },
     tooltip: {
-      backgroundColor: 'rgba(255, 255, 255, 0.95)',
-      titleColor: '#1f2937',
-      bodyColor: '#4b5563',
-      borderColor: '#e5e7eb',
-      borderWidth: 1,
+      backgroundColor: '#1a1f2e',
+      titleColor: '#fff',
+      bodyColor: '#9ca3af',
       padding: 12,
+      cornerRadius: 8,
+      displayColors: false,
       callbacks: {
         label: function(context) {
           return `${context.label}: ${context.parsed}%`
@@ -54,22 +54,22 @@ const chartOptions = {
 </script>
 
 <template>
-  <div class="flex items-center gap-6">
+  <div class="flex items-center gap-8">
     <!-- Chart -->
-    <div class="w-40 h-40 flex-shrink-0">
+    <div class="w-[160px] h-[160px] flex-shrink-0">
       <Doughnut :data="chartData" :options="chartOptions" />
     </div>
 
     <!-- Legend -->
-    <div class="flex-1 space-y-3">
+    <div class="flex-1 space-y-4">
       <div
         v-for="item in data"
         :key="item.label"
         class="flex items-center justify-between"
       >
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2.5">
           <span
-            class="w-2.5 h-2.5 rounded-full"
+            class="w-3 h-3 rounded-full"
             :style="{ backgroundColor: item.color }"
           ></span>
           <span class="text-sm text-gray-600">{{ item.label }}</span>

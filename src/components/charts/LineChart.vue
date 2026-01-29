@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, onMounted } from 'vue'
+import { computed } from 'vue'
 import { Line } from 'vue-chartjs'
 import {
   Chart as ChartJS,
@@ -35,33 +35,29 @@ const props = defineProps({
   }
 })
 
-const chartRef = ref(null)
-
 const chartData = computed(() => ({
   labels: props.labels,
   datasets: props.datasets.map((dataset, index) => {
-    // Create gradient for first dataset (main line)
-    const gradientFill = index === 0
+    const isMain = index === 0
 
     return {
       ...dataset,
       tension: 0.4,
       pointRadius: 0,
-      pointHoverRadius: 6,
+      pointHoverRadius: 5,
       pointBackgroundColor: dataset.borderColor,
       pointBorderColor: '#fff',
       pointBorderWidth: 2,
-      borderWidth: 2.5,
-      fill: gradientFill ? 'origin' : false,
-      backgroundColor: gradientFill
+      borderWidth: isMain ? 2.5 : 2,
+      fill: isMain ? 'origin' : false,
+      backgroundColor: isMain
         ? (context) => {
             const chart = context.chart
             const { ctx, chartArea } = chart
             if (!chartArea) return null
             const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top)
             gradient.addColorStop(0, 'rgba(139, 92, 246, 0)')
-            gradient.addColorStop(0.5, 'rgba(139, 92, 246, 0.08)')
-            gradient.addColorStop(1, 'rgba(139, 92, 246, 0.15)')
+            gradient.addColorStop(1, 'rgba(139, 92, 246, 0.12)')
             return gradient
           }
         : 'transparent'
@@ -81,15 +77,13 @@ const chartOptions = {
       display: false
     },
     tooltip: {
-      backgroundColor: 'rgba(255, 255, 255, 0.98)',
-      titleColor: '#1f2937',
-      bodyColor: '#4b5563',
-      borderColor: '#e5e7eb',
-      borderWidth: 1,
+      backgroundColor: '#1a1f2e',
+      titleColor: '#fff',
+      bodyColor: '#9ca3af',
       padding: 14,
       boxPadding: 6,
       usePointStyle: true,
-      cornerRadius: 10,
+      cornerRadius: 8,
       titleFont: {
         size: 13,
         weight: '600'
@@ -100,9 +94,7 @@ const chartOptions = {
       callbacks: {
         label: function(context) {
           let label = context.dataset.label || ''
-          if (label) {
-            label += ': '
-          }
+          if (label) label += ': '
           if (context.parsed.y !== null) {
             label += new Intl.NumberFormat('en-US').format(context.parsed.y)
           }
@@ -122,16 +114,14 @@ const chartOptions = {
       ticks: {
         color: '#9ca3af',
         font: {
-          size: 11,
-          weight: '500'
+          size: 11
         },
         padding: 8
       }
     },
     y: {
       grid: {
-        color: '#f3f4f6',
-        drawBorder: false
+        color: 'rgba(0, 0, 0, 0.04)'
       },
       border: {
         display: false
@@ -139,8 +129,7 @@ const chartOptions = {
       ticks: {
         color: '#9ca3af',
         font: {
-          size: 11,
-          weight: '500'
+          size: 11
         },
         padding: 12,
         callback: function(value) {
@@ -154,6 +143,6 @@ const chartOptions = {
 
 <template>
   <div class="h-full w-full">
-    <Line ref="chartRef" :data="chartData" :options="chartOptions" />
+    <Line :data="chartData" :options="chartOptions" />
   </div>
 </template>
