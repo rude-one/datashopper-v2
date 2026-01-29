@@ -27,7 +27,9 @@ function isActive(path) {
   <aside class="fixed left-0 top-0 h-full w-[240px] bg-[#1E2432] flex flex-col z-50">
     <!-- Logo -->
     <div class="h-[72px] flex items-center px-6">
-      <img src="/logo-white.svg" alt="dataShopper" class="h-7" />
+      <span class="text-[28px] font-black italic tracking-tight" style="font-family: 'Nunito', sans-serif;">
+        <span class="text-[#6C5CE7]">data</span><span class="text-white">Shopper</span>
+      </span>
     </div>
 
     <!-- Main Navigation -->
