@@ -7,35 +7,41 @@ export default {
   theme: {
     extend: {
       colors: {
-        brand: {
-          DEFAULT: '#10b981',
-          50: '#ecfdf5',
-          100: '#d1fae5',
-          200: '#a7f3d0',
-          300: '#6ee7b7',
-          400: '#34d399',
-          500: '#10b981',
-          600: '#059669',
+        // Brand colors from logo
+        logo: {
+          purple: '#6C5CE7',
+          dark: '#2D3436',
         },
+        // Sidebar
         sidebar: {
-          DEFAULT: '#1a1f2e',
-          hover: '#242938',
-          active: '#10b981',
-          muted: '#6b7280',
+          bg: '#1E2432',
+          hover: '#2A3142',
+          border: '#343D4D',
         },
+        // Accent green (for active states, LIVE badge)
+        accent: {
+          DEFAULT: '#00D9A5',
+          light: '#E8FBF5',
+          dark: '#00B88C',
+        },
+        // Chart colors
         chart: {
-          purple: '#8b5cf6',
-          'purple-light': '#c4b5fd',
-          indigo: '#6366f1',
-          green: '#10b981',
+          purple: '#8B5CF6',
+          'purple-light': '#C4B5FD',
+          blue: '#6366F1',
+          green: '#10B981',
+          gray: '#9CA3AF',
         }
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+      },
+      fontSize: {
+        '2xs': ['0.625rem', { lineHeight: '0.875rem' }],
       },
       boxShadow: {
-        'card': '0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.06)',
-        'card-lg': '0 10px 40px -10px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05)',
+        'card': '0 1px 3px 0 rgb(0 0 0 / 0.05), 0 1px 2px -1px rgb(0 0 0 / 0.05)',
+        'card-hover': '0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.05)',
       },
     },
   },
