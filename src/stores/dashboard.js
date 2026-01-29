@@ -55,6 +55,59 @@ export const useDashboardStore = defineStore('dashboard', () => {
     content: `Among the 286,815 visitors, we identified 107,869 with a match rate of 37.61%. From there, we further curated the list based on your set filters down to 30,872 amount of results. This selective approach helps in focusing marketing efforts on the most promising leads, improving both efficiency and potential returns on investment. The data underscores good segmentation which can be pivotal for targeted marketing and personalized advertising strategies.`
   })
 
+  // Traffic by brand data
+  const trafficByBrand = ref([
+    { label: 'Popular Science', value: 28, color: '#8b5cf6' },
+    { label: 'Bob Vila', value: 22, color: '#c4b5fd' },
+    { label: 'The Drive', value: 18, color: '#6366f1' },
+    { label: 'Outdoor Life', value: 15, color: '#22c55e' },
+    { label: 'Other', value: 17, color: '#9ca3af' }
+  ])
+
+  // Live visitor feed data
+  const liveVisitors = ref([
+    {
+      brand: 'We Are The Mighty',
+      path: '/best-cordless-drills',
+      email: null,
+      initials: null,
+      status: 'anonymous',
+      time: 'less than a minute ago'
+    },
+    {
+      brand: 'Domino',
+      path: '/james-webb-new-discoveries',
+      email: 'm***@outlook.com',
+      initials: 'M.',
+      status: 'active',
+      time: 'less than a minute ago'
+    },
+    {
+      brand: 'Dwell',
+      path: '/best-cordless-drills',
+      email: null,
+      initials: null,
+      status: 'anonymous',
+      time: 'less than a minute ago'
+    },
+    {
+      brand: 'Popular Science',
+      path: '/space-exploration-2026',
+      email: 'j***@gmail.com',
+      initials: 'J.',
+      status: 'active',
+      time: '2 minutes ago'
+    },
+    {
+      brand: 'The Drive',
+      path: '/electric-vehicle-reviews',
+      email: null,
+      initials: null,
+      status: 'anonymous',
+      time: '3 minutes ago'
+    }
+  ])
+
   const isLoading = ref(false)
 
   // Actions
@@ -69,10 +122,6 @@ export const useDashboardStore = defineStore('dashboard', () => {
   async function fetchDashboardData() {
     isLoading.value = true
     try {
-      // TODO: Replace with actual API call
-      // const response = await fetch(`/api/dashboard?websiteId=${selectedWebsite.value.id}&start=${dateRange.value.start}&end=${dateRange.value.end}`)
-      // const data = await response.json()
-
       // Generate mock chart data
       const days = []
       const users = []
@@ -83,10 +132,10 @@ export const useDashboardStore = defineStore('dashboard', () => {
       const endDate = new Date(dateRange.value.end)
 
       for (let d = new Date(startDate); d <= endDate; d.setDate(d.getDate() + 1)) {
-        days.push(d.toLocaleDateString('en-US', { day: '2-digit', month: 'short' }))
-        users.push(Math.floor(Math.random() * 5000) + 8000)
-        identified.push(Math.floor(Math.random() * 2000) + 2000)
-        filtered.push(Math.floor(Math.random() * 3000) + 3000)
+        days.push(d.toLocaleDateString('en-US', { day: 'numeric', month: 'short' }))
+        users.push(Math.floor(Math.random() * 30000) + 40000)
+        identified.push(Math.floor(Math.random() * 20000) + 60000)
+        filtered.push(Math.floor(Math.random() * 25000) + 75000)
       }
 
       chartData.value = {
@@ -117,6 +166,8 @@ export const useDashboardStore = defineStore('dashboard', () => {
     topSources,
     topCities,
     insights,
+    trafficByBrand,
+    liveVisitors,
     isLoading,
     // Actions
     setDateRange,
