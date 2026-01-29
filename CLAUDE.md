@@ -4,53 +4,75 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-DataShopper v2 - [Add project description here]
+DataShopper v2 - A visitor identification and marketing intelligence dashboard that helps businesses identify website visitors and target them with personalized marketing campaigns.
 
 ## Tech Stack
 
-<!-- Update this section as you add technologies -->
-- Language: [e.g., TypeScript, Python]
-- Framework: [e.g., React, Next.js, FastAPI]
-- Database: [e.g., PostgreSQL, MongoDB]
-- Testing: [e.g., Jest, Pytest]
+- Language: JavaScript (ES6+)
+- Framework: Vue.js 3 (Composition API)
+- Build Tool: Vite
+- Styling: Tailwind CSS
+- State Management: Pinia
+- Routing: Vue Router
+- Charts: Chart.js with vue-chartjs
+- Icons: Heroicons (Vue)
+- Backend: REST API (separate service)
 
 ## Common Commands
 
-<!-- Add your project's common commands here -->
 ```bash
 # Install dependencies
-# npm install
+npm install
 
 # Run development server
-# npm run dev
-
-# Run tests
-# npm test
+npm run dev
 
 # Build for production
-# npm run build
+npm run build
+
+# Preview production build
+npm run preview
 
 # Lint code
-# npm run lint
+npm run lint
 ```
 
 ## Project Structure
 
-<!-- Document key directories and their purposes -->
 ```
 /
-├── src/           # Source code
-├── tests/         # Test files
-└── docs/          # Documentation
+├── src/
+│   ├── assets/          # CSS and static assets
+│   ├── components/
+│   │   ├── charts/      # Chart components (LineChart, etc.)
+│   │   ├── common/      # Shared UI components
+│   │   ├── dashboard/   # Dashboard-specific components
+│   │   └── layout/      # Layout components (Sidebar, Header)
+│   ├── router/          # Vue Router configuration
+│   ├── services/        # API service layer
+│   ├── stores/          # Pinia stores
+│   ├── views/           # Page components
+│   ├── App.vue          # Root component
+│   └── main.js          # Application entry point
+├── public/              # Static assets
+├── index.html           # HTML entry point
+├── vite.config.js       # Vite configuration
+├── tailwind.config.js   # Tailwind CSS configuration
+└── package.json         # Project dependencies
 ```
 
 ## Development Guidelines
 
+- Use Vue 3 Composition API with `<script setup>` syntax
 - Follow existing code style and patterns
-- Write tests for new features
-- Keep commits focused and atomic
-- Update documentation when making significant changes
+- Keep components focused and single-purpose
+- Use Pinia stores for shared state
+- API calls should go through the services layer
+- Use Tailwind CSS utility classes for styling
 
 ## Architecture Notes
 
-<!-- Add architecture decisions and patterns used -->
+- **Component Architecture**: Smart/container components in `views/`, presentational components in `components/`
+- **State Management**: Pinia stores handle global state; component state stays local when possible
+- **API Layer**: All REST API calls go through `src/services/api.js` for consistent error handling
+- **Routing**: Lazy-loaded routes for better performance
